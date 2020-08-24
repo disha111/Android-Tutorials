@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email_val = email.getText().toString();
                 String password = pass.getText().toString();
-                //String reg_email = "^(([^<>()\\[\\]\\\\.,;:\\s@\"]+(\\.[^<>()\\[\\]\\\\.,;:\\s@\"]+)*)|(\".+\"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z\\-0-9]+\\.)+[a-zA-Z]{2,}))$";
                 int count = 0;
                 if(Patterns.EMAIL_ADDRESS.matcher(email_val).matches() && password.length()>=8){
                     startActivity(new Intent(MainActivity.this, Welcome.class));
