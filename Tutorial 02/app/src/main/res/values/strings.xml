@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">19SOECE13131</string>
+    <string name="lblname">About Us</string>
+    <string name="etEnroll">19SOECE13131</string>
+    <string name="etFirstName">Priyansh</string>
+    <string name="etMiddleName">Chandreshbhai</string>
+    <string name="etLastName">Shah</string>
+    <string name="etEmail">pshah652@rku.ac.in</string>
+    <string name="etPassword">rajkot03</string>
+    <string name="etGender">Male</string>
+    <string name="etCity">Rajkot</string>
+</resources>
