@@ -1,0 +1,42 @@
+<resources>
+
+    <string name="app_name">Tutorial05</string>
+
+    <!-- Splash Screen -->
+    <string name="tutorial_04">Welcome!</string>
+
+    <!-- Login Page  -->
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_password">Enter Password</string>
+    <string name="user_login">User Login</string>
+    <string name="login_btn">Login</string>
+    <string name="registerme">Rgeistration here...</string>
+
+    <!-- Signup Page  -->
+    <string name="signup_email">Enter Email as Username</string>
+    <string name="signup_password">Enter Password</string>
+    <string name="signup_user">User Signup</string>
+    <string name="signup_btn">REGISTER ME</string>
+    <string name="signup_txt">Rgeistration Form</string>
+    <string name="enter_first_name">Enter First Name</string>
+    <string name="enter_last_name">Enter Last Name</string>
+    <string name="branch_ce_it">Branch CE/IT</string>
+    <string name="status">Profile Status Active/Inactive</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+
+    <!-- Spinner Value -->
+    <string-array name="city_names">
+        <item>Select Your City...</item>
+        <item>Rajkot</item>
+        <item>Jamnagar</item>
+        <item>Junagath</item>
+        <item>Diu</item>
+        <item>Ahmedabad</item>
+        <item>Baroda</item>
+        <item>Other</item>
+    </string-array>
+    <!-- Welcome Page -->
+    <string name="welcome">Welcome!!</string>
+
+</resources>
