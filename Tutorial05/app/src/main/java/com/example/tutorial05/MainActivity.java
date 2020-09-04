@@ -41,13 +41,8 @@ public class MainActivity extends AppCompatActivity {
                 int count = 0;
                 if(Patterns.EMAIL_ADDRESS.matcher(email_val).matches() && password.length()>=8){
                     Intent intent = new Intent(MainActivity.this, Welcome.class);
-//                    intent.putExtra("which","login");
-//                    intent.putExtra("email",email.getText().toString().trim());
-//                    intent.putExtra("password",pass.getText().toString().trim());
-
                    // tut 6   add value in SharedPreferences
                     editor.putString("email",email.getText().toString().trim());
-                    editor.apply();
                     editor.commit();
                     startActivity(intent);
                     finish();

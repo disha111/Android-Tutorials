@@ -1,6 +1,7 @@
 <resources>
 
-    <string name="app_name">Tutorial05</string>
+    <string name="app_name05">Tutorial 05</string>
+    <string name="app_name06">Tutorial 06</string>
 
     <!-- Splash Screen -->
     <string name="tutorial_04">Welcome!</string>

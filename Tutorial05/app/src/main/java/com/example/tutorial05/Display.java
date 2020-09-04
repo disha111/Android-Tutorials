@@ -15,10 +15,6 @@ public class Display extends AppCompatActivity {
 
         display = findViewById(R.id.wel_display);
 
-//        fname.setVisibility(View.VISIBLE);
-//        lname.setVisibility(View.VISIBLE);
-//        gender.setVisibility(View.VISIBLE);
-//        branch.setVisibility(View.VISIBLE);
         String Fname,Lname,Email,Pass,Gender,City;
         Boolean Status;
         Intent intent = getIntent();
@@ -28,13 +24,8 @@ public class Display extends AppCompatActivity {
         Pass = intent.getStringExtra("password");
         Gender = intent.getStringExtra("gender");
         City = intent.getStringExtra("city");
-//        Branch = intent.getBooleanExtra("branch", false);
         Status = intent.getBooleanExtra("status",false);
-//        String Branch_val = "Other";
         String Status_val = "Inactive";
-//        if (Branch) {
-//            Branch_val = "Branch CE/IT";
-//        }
         if (Status) {
             Status_val = "Active";
         }
