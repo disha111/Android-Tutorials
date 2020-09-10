@@ -28,6 +28,9 @@ public class Signup extends AppCompatActivity {
     Button signup;
     Spinner city;
     Switch branch;
+    //*****************"Tutorial 07***********************
+    MyDatabaseHelper mydb;
+    //*****************"Tutorial 07"***********************
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,17 +62,27 @@ public class Signup extends AppCompatActivity {
 
                 if(!Fname && !Lname && !Email_val && !Password_val && Patterns.EMAIL_ADDRESS.matcher(Email).matches() && Password.length()>=8 && !set_city.equals("Select Your City...")){
                     Gender = findViewById(id);
-                    Intent intent = new Intent(Signup.this, Display.class);
-                    intent.putExtra("fname",fname.getText().toString().trim());
-                    intent.putExtra("lname",lname.getText().toString().trim());
-                    intent.putExtra("email",email.getText().toString().trim());
-                    intent.putExtra("password",password.getText().toString().trim());
-                    intent.putExtra("gender",Gender.getText().toString());
-                    intent.putExtra("branch",branch.isChecked());
-                    intent.putExtra("city",city.getSelectedItem().toString());
-                    intent.putExtra("status",checkBox.isChecked());
-                    Toast.makeText(Signup.this,"Valid Credentials...",Toast.LENGTH_SHORT).show();
-                    startActivity(intent);
+//                    Intent intent = new Intent(Signup.this, Display.class);
+//                    intent.putExtra("fname",fname.getText().toString().trim());
+//                    intent.putExtra("lname",lname.getText().toString().trim());
+//                    intent.putExtra("email",email.getText().toString().trim());
+//                    intent.putExtra("password",password.getText().toString().trim());
+//                    intent.putExtra("gender",Gender.getText().toString());
+//                    intent.putExtra("branch",branch.isChecked());
+//                    intent.putExtra("city",city.getSelectedItem().toString());
+//                    intent.putExtra("status",checkBox.isChecked());
+//                    Toast.makeText(Signup.this,"Valid Credentials...",Toast.LENGTH_SHORT).show();
+//                    startActivity(intent);
+
+                    //*****************"Tutorial 07"***********************
+                    mydb = new MyDatabaseHelper(Signup.this);
+                    Boolean res=mydb.reg_insert(fname.getText().toString().trim(),lname.getText().toString().trim(),Email,Password,Gender.getText().toString(),set_city);
+                    if(res){
+                        Toast.makeText(Signup.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                    }else {
+                        Toast.makeText(Signup.this, "Error", Toast.LENGTH_SHORT).show();
+                    }
+                    //*****************"Tutorial 07"***********************
                 }
                 else {
                     if(Fname){
