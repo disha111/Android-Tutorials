@@ -76,9 +76,13 @@ public class Signup extends AppCompatActivity {
 
                     //*****************"Tutorial 07"***********************
                     mydb = new MyDatabaseHelper(Signup.this);
-                    Boolean res=mydb.reg_insert(fname.getText().toString().trim(),lname.getText().toString().trim(),Email,Password,Gender.getText().toString(),set_city);
+                    Boolean res=mydb.reg_insert(fname.getText().toString().trim(),lname.getText().toString().trim(),Email,Branch,Password,Gender.getText().toString(),set_city);
+                    Intent intent = new Intent(Signup.this,MainActivity.class);
                     if(res){
                         Toast.makeText(Signup.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
+                        intent.putExtra("user_id",Email);
+                        intent.putExtra("pass",Password);
+                        startActivity(intent);
                     }else {
                         Toast.makeText(Signup.this, "Error", Toast.LENGTH_SHORT).show();
                     }

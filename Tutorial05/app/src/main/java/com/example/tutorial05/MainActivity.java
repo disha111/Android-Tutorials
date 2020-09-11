@@ -39,6 +39,13 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
         }
+        //***************Tutorial07**************
+        Intent intent = getIntent();
+        String user_id = intent.getStringExtra("user_id");
+        String user_pass = intent.getStringExtra("pass");
+        email.setText(user_id);
+        pass.setText(user_pass);
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

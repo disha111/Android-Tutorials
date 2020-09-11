@@ -24,7 +24,7 @@ public class Welcome extends AppCompatActivity {
         preferences = getSharedPreferences("Session",MODE_PRIVATE);
         editor = preferences.edit();
         welcome = findViewById(R.id.welcome);
-        welcome.setText("Welcome! "+preferences.getString("email",""));
+        welcome.setText("Welcome, "+preferences.getString("email",""));
     }
 
 //    public void logout(View view) {

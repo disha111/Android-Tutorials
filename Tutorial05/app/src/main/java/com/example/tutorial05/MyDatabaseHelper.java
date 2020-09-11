@@ -25,6 +25,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static  final String branch = "branch";
     private static  final String gen = "gender";
     private static  final String location = "city";
+    String Branch_val = "Other";
 
     public MyDatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -48,15 +49,18 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean reg_insert(String firstname, String lastname, String email, String password, String gender, String city){
+    public boolean reg_insert(String firstname, String lastname, String email,Boolean field, String password, String gender, String city){
         SQLiteDatabase db = this.getWritableDatabase();
-
+        if (field) {
+            Branch_val = "Branch CE/IT";
+        }
         ContentValues values = new ContentValues();
         values.put(fname,firstname);
         values.put(lname,lastname);
         values.put(user_id,email);
         values.put(pass,password);
         values.put(gen,gender);
+        values.put(branch,Branch_val);
         values.put(location,city);
 
         long res = db.insert(Signup_Table_Name,branch,values);
