@@ -8,29 +8,19 @@
     android:padding="10dp"
     tools:context=".Welcome">
 
-    <TextView
-        android:id="@+id/welcome"
-        style="@style/textview"
+    //*******************"Tutorial 08"*******************
+    <ListView
+        android:id="@+id/lstDataView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg"
-        android:text="@string/welcome"
+        android:layout_height="match_parent"
+        android:layout_marginTop="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintTop_toTopOf="parent">
 
-    <!--<Button
-        android:id="@+id/logout"
-        style="@style/textview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:onClick="logout"
-        android:text="Logout"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" /> -->
+    </ListView>
+
+    //*******************"Tutorial 08"*******************
 </androidx.constraintlayout.widget.ConstraintLayout>

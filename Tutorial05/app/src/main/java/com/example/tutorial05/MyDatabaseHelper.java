@@ -9,6 +9,8 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+
 public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
@@ -77,4 +79,41 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         return cursor;
     }
     //*****************"Tutorial 07"***********************
+
+    //*****************"Tutorial 08"***********************
+    public ArrayList<String> getUserList(){
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<String> list = new ArrayList<>();
+        Cursor cursor = db.query(
+                Signup_Table_Name,
+                new String[]{user_id},
+                null,
+                null,
+                null,
+                null,
+                null
+        );
+        if(cursor!=null && cursor.getCount()>0){
+            cursor.moveToFirst();
+            do{
+                list.add(cursor.getString(0));
+            }while (cursor.moveToNext());
+        }
+        return list;
+    }
+
+    public Cursor getPartUserData(String username) {
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(
+                Signup_Table_Name,
+                null,
+                "email=?",
+                new String[]{username},
+                null,
+                null,
+                null
+        );
+        return cursor;
+    }
+    //*****************"Tutorial 08"***********************
 }

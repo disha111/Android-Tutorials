@@ -5,17 +5,29 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class Welcome extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-    TextView welcome;
+
+    //*******************"Tutorial 08"*******************
+    ListView lstData;
+    MyDatabaseHelper myDB;
+    ArrayAdapter<String> adapter;
+    //    String data[]={"XYZ","ABC"};
+    //*******************"Tutorial 08"*******************
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,18 +35,44 @@ public class Welcome extends AppCompatActivity {
         // tut 6   get value from SharedPreferences
         preferences = getSharedPreferences("Session",MODE_PRIVATE);
         editor = preferences.edit();
-        welcome = findViewById(R.id.welcome);
-        welcome.setText("Welcome, "+preferences.getString("email",""));
-    }
 
-//    public void logout(View view) {
-//        // tut 6   get value from SharedPreferences
-//        editor.remove("email");
-////        editor.apply();
-//        editor.commit();
-//        startActivity(new Intent(Welcome.this,MainActivity.class));
-//        finish();
-//    }
+        //*******************"Tutorial 08"*******************
+        lstData = findViewById(R.id.lstDataView);
+        myDB = new MyDatabaseHelper(this);
+
+        adapter = new ArrayAdapter<String>(
+                this,
+                android.R.layout.simple_list_item_1,
+//                data,
+                myDB.getUserList()
+        ){@Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            // Get the Item from ListView
+            View view = super.getView(position, convertView, parent);
+
+            // Initialize a TextView for ListView each Item
+            TextView tv = (TextView) view.findViewById(android.R.id.text1);
+
+            // Set the text color of TextView (ListView Item)
+            tv.setTextColor(Color.RED);
+
+            // Generate ListView Item using TextView
+            return view;
+        }
+        };
+        lstData.setAdapter(adapter);
+        lstData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                String username = ((TextView)view).getText().toString();
+                Intent intent = new Intent(Welcome.this,Display.class);
+                intent.putExtra("username",username);
+                startActivity(intent);
+
+            }
+        });
+        //*******************"Tutorial 08"*******************
+    }
 
     // Tut 6  Menu Linked
     @Override
