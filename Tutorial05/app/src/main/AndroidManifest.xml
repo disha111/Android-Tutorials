@@ -5,10 +5,11 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/micon"
-        android:label="@string/app_name08"
+        android:label="@string/app_name09"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Welcome"></activity>
+        <activity android:name=".FileManagement" android:parentActivityName=".Welcome"></activity>
+        <activity android:name=".Welcome" />
         <activity
             android:name=".Signup"
             android:label="@string/signup_txt"
@@ -23,8 +24,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Display"
-            android:parentActivityName=".Signup"/>
+        <activity
+            android:name=".Display"
+            android:parentActivityName=".Signup" />
         <activity android:name=".MainActivity" />
     </application>
 

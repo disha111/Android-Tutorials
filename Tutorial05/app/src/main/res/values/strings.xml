@@ -4,6 +4,7 @@
     <string name="app_name06">Tutorial 06</string>
     <string name="app_name07">Tutorial 07</string>
     <string name="app_name08">Tutorial 08</string>
+    <string name="app_name09">Tutorial 09</string>
 
     <!-- Splash Screen -->
     <string name="tutorial_04">Welcome!</string>
@@ -41,5 +42,12 @@
     </string-array>
     <!-- Welcome Page -->
     <string name="welcome">Welcome!!</string>
+    <!-- File Handling -->
+    <string name="hint_string">Enter text here...</string>
+    <string name="name">Name</string>
+    <string name="file_view">READ ASSETS</string>
+    <string name="file_read">File Read</string>
+    <string name="textview">TextView</string>
+    <string name="file_write">Write File</string>
 
 </resources>

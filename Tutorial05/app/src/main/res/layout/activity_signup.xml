@@ -88,14 +88,16 @@
                 android:layout_marginStart="10dp"
                 android:background="@drawable/bg"
                 android:orientation="horizontal">
+
                 <Switch
                     android:id="@+id/signup_branch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="3dp"
                     android:background="@drawable/bg"
                     android:text="@string/branch_ce_it"
-                    android:textSize="18sp"
                     android:textColor="@color/white"
+                    android:textSize="18sp"
                     android:theme="@style/SwitchTheme"
                     tools:ignore="UseSwitchCompatOrMaterialXml" />
                 <RadioGroup
