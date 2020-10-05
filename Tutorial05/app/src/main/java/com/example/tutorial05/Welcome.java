@@ -54,8 +54,12 @@ public class Welcome extends AppCompatActivity {
         lstData = findViewById(R.id.lstDataView);
         onlineUsersList = findViewById(R.id.onlineUsersView);
 
+
         int temp = getIntent().getIntExtra("temp",0);
-        if(temp==1){
+
+        if(temp == 1){
+            editor.putString("onlinedata", "off");
+            editor.commit();
             //*******************"Tutorial 08"*******************
             onlineUsersList.setVisibility(View.GONE);
             myDB = new MyDatabaseHelper(this);
@@ -95,6 +99,11 @@ public class Welcome extends AppCompatActivity {
             //*******************"Tutorial 08"*******************
         }
         else{
+            editor.putString("onlinedata", "on");
+            editor.commit();
+            getSupportActionBar().setHomeButtonEnabled(true);
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            lstData.setVisibility(View.GONE);
             setTitle("Online Users");
             Toast.makeText(this, "working", Toast.LENGTH_SHORT).show();
             onlineUsersList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -103,6 +112,8 @@ public class Welcome extends AppCompatActivity {
                     Intent intent = new Intent(Welcome.this, Display.class);
                     intent.putExtra("userPosition",i);
                     intent.putExtra("temp",4);
+                    Toast.makeText(Welcome.this, "on in welcome", Toast.LENGTH_SHORT).show();
+
                     startActivity(intent);
                 }
             });
@@ -112,7 +123,20 @@ public class Welcome extends AppCompatActivity {
 
 
     }
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent backIntent = new Intent(getApplicationContext(),Welcome.class);
+        backIntent.putExtra("temp",1);
+        startActivity(backIntent);
+        this.finish();
+    }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
     // Tut 6  Menu Linked
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -24,8 +24,7 @@
             android:label="Database Users"/>
         <activity android:name=".Signup"
             android:label="@string/signup_txt"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".MainActivity" />
+            android:windowSoftInputMode="stateHidden" />
         <activity android:name=".Display"
             android:label="Users Data"
             android:parentActivityName=".Welcome" />
