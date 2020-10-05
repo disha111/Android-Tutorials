@@ -21,16 +21,16 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 
 public class FileManagement extends AppCompatActivity {
-
-    SharedPreferences preferences;
-    SharedPreferences.Editor editor;
-//    ********************TUTORIAL09***************************************************
+//    //******"Extra session management (For setting menu for multiActivity)"*******
+//    SharedPreferences preferences;
+//    SharedPreferences.Editor editor;
+//    String onlinedata;
+    //    ********************TUTORIAL09***************************************************
     final String FILE_ASSETS = "data.json";
     final String FILE_INTERNAL = "data.txt";
     EditText editTextDataFile;
     TextView filesView;
 
-    String onlinedata;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,36 +39,37 @@ public class FileManagement extends AppCompatActivity {
         //    ********************TUTORIAL09***************************************************
         editTextDataFile = findViewById(R.id.editTextDataFile);
         filesView = findViewById(R.id.filesView);
-
-        getSupportActionBar().setHomeButtonEnabled(true);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        //****************** preferences **********************
-        preferences = getSharedPreferences("Session",MODE_PRIVATE);
-        editor = preferences.edit();
-        onlinedata = preferences.getString("onlinedata","");
+        //******"Extra session management (For setting menu for multiActivity)"*******
+//
+//        getSupportActionBar().setHomeButtonEnabled(true);
+//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+//
+//        //****************** preferences **********************
+//        preferences = getSharedPreferences("Session",MODE_PRIVATE);
+//        editor = preferences.edit();
+//        onlinedata = preferences.getString("onlinedata","");
     }
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        Intent backIntent = new Intent(getApplicationContext(),Welcome.class);
-        //******** Tutorial 10 Back Arrow **************
-        if(onlinedata=="on"){
-            backIntent.putExtra("temp",3);
-        }
-        else{
-            backIntent.putExtra("temp",1);
-        }
-        startActivity(backIntent);
-        this.finish();
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        onBackPressed();
-        return true;
-    }
+    //******"Extra session management (For managing back button)*******
+//    @Override
+//    public void onBackPressed() {
+//        super.onBackPressed();
+//        Intent backIntent = new Intent(getApplicationContext(),Welcome.class);
+//        //******** Tutorial 10 Back Arrow **************
+//        if(onlinedata=="on"){
+//            backIntent.putExtra("temp",3);
+//        }
+//        else{
+//            backIntent.putExtra("temp",1);
+//        }
+//        startActivity(backIntent);
+//        this.finish();
+//    }
+//
+//    @Override
+//    public boolean onSupportNavigateUp() {
+//        onBackPressed();
+//        return true;
+//    }
     public void readfile(View view) {
         FileInputStream fileInputStream = null;
         try {

@@ -33,7 +33,7 @@ import java.net.URL;
 public class Welcome extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
-
+    String mState;
     //*******************"Tutorial 08"*******************
     ListView lstData;
     MyDatabaseHelper myDB;
@@ -58,8 +58,8 @@ public class Welcome extends AppCompatActivity {
         int temp = getIntent().getIntExtra("temp",0);
 
         if(temp == 1){
-            editor.putString("onlinedata", "off");
-            editor.commit();
+//            editor.putString("onlinedata", "off");
+//            editor.commit();
             //*******************"Tutorial 08"*******************
             onlineUsersList.setVisibility(View.GONE);
             myDB = new MyDatabaseHelper(this);
@@ -99,8 +99,9 @@ public class Welcome extends AppCompatActivity {
             //*******************"Tutorial 08"*******************
         }
         else{
-            editor.putString("onlinedata", "on");
-            editor.commit();
+//            editor.putString("onlinedata", "on");
+//            editor.commit();
+            mState = "HIDE_MENU";
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             lstData.setVisibility(View.GONE);
@@ -141,6 +142,10 @@ public class Welcome extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu,menu);
+        if(mState == "HIDE_MENU"){
+            for (int i = 0; i < menu.size(); i++)
+                menu.getItem(i).setVisible(false);
+        }
         return super.onCreateOptionsMenu(menu);
     }
     // Tut 6 Select menu item..
