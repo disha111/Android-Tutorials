@@ -96,7 +96,6 @@ public class Welcome extends AppCompatActivity {
             //*******************"Tutorial 09"*******************
             case R.id.file_menu:
                 startActivity(new Intent(Welcome.this,FileManagement.class));
-                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);

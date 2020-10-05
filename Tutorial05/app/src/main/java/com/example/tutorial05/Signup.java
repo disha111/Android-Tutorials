@@ -71,6 +71,7 @@ public class Signup extends AppCompatActivity {
                         intent.putExtra("user_id",Email);
                         intent.putExtra("pass",Password);
                         startActivity(intent);
+                        finish();
                     }else {
                         Toast.makeText(Signup.this, "Error", Toast.LENGTH_SHORT).show();
                     }
@@ -108,4 +109,10 @@ public class Signup extends AppCompatActivity {
             }
         });
     }
+
+    public void login_link(View view) {
+        startActivity(new Intent(Signup.this,MainActivity.class));
+        finish();
+    }
+
 }

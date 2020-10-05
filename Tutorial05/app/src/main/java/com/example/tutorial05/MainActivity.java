@@ -77,7 +77,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
-    public void signup(View view) {
+    public void signup_link(View view) {
         startActivity(new Intent(MainActivity.this,Signup.class));
 
     }

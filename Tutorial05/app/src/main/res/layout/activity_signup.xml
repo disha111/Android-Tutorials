@@ -2,163 +2,107 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    style="@style/layout_style2"
     tools:context=".Signup">
     <ScrollView
         android:id="@+id/scrollview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        style="@style/layout_style"
         android:layout_margin="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="MissingConstraints">
         <LinearLayout
             android:id="@+id/linearlayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="@style/layout_style"
             android:orientation="vertical"
             android:paddingTop="20dp">
             <TextView
                 android:id="@+id/signup_textview"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:gravity="center"
-                android:text="@string/signup_txt"
-                android:textColor="#ffffff"
-                android:textSize="30sp" />
+                style="@style/header_textview_style"
+                android:text="@string/signup_txt" />
             <EditText
                 android:id="@+id/signup_fname"
-                style="@style/edittext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/edittext_style"
                 android:autofillHints=""
                 android:drawableStart="@drawable/user"
-                android:hint="@string/enter_first_name"
-                android:inputType="text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:hint="@string/enter_first_name" />
             <EditText
                 android:id="@+id/signup_lname"
-                style="@style/edittext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/edittext_style"
                 android:autofillHints=""
                 android:drawableStart="@drawable/user"
-                android:hint="@string/enter_last_name"
-                android:inputType="text"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:hint="@string/enter_last_name" />
             <EditText
                 android:id="@+id/signup_email"
-                style="@style/edittext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/edittext_style"
                 android:autofillHints=""
                 android:drawableStart="@drawable/email"
                 android:hint="@string/signup_email"
-                android:inputType="textEmailAddress"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                android:inputType="textEmailAddress" />
             <EditText
                 android:id="@+id/signup_password"
-                style="@style/edittext"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/edittext_style"
                 android:autofillHints=""
                 android:drawableStart="@drawable/password"
                 android:hint="@string/enter_password"
                 android:inputType="textPassword"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-            <LinearLayout
-                android:id="@+id/signup_linearlayout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                style="@style/edittext"
-                android:layout_marginStart="10dp"
-                android:background="@drawable/bg"
-                android:orientation="horizontal">
+                android:longClickable="false" />
 
-                <Switch
-                    android:id="@+id/signup_branch"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="3dp"
-                    android:background="@drawable/bg"
-                    android:text="@string/branch_ce_it"
-                    android:textColor="@color/white"
-                    android:textSize="18sp"
-                    android:theme="@style/SwitchTheme"
-                    tools:ignore="UseSwitchCompatOrMaterialXml" />
                 <RadioGroup
                     android:id="@+id/signup_gender"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/bg"
+                    style="@style/layout_style"
+                    android:padding="10dp"
                     android:orientation="horizontal">
+                    <Switch
+                        android:id="@+id/signup_branch"
+                        style="@style/SwitchStyle"
+                        android:theme="@style/SwitchTheme"
+                        android:text="@string/branch_ce_it"
+                        tools:ignore="UseSwitchCompatOrMaterialXml" />
                     <RadioButton
                         android:id="@+id/signup_btn1"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/white"
+                        style="@style/radio_button_style"
+                        app:autoSizeTextType="none"
+                        app:autoSizeMinTextSize="10sp"
+                        app:autoSizeMaxTextSize="100sp"
+                        app:autoSizeStepGranularity="2sp"
                         android:checked="true"
-                        android:text="@string/male"
-                        android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        android:text="@string/male" />
                     <RadioButton
                         android:id="@+id/signup_btn2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:buttonTint="@color/white"
-                        android:text="@string/female"
-                        android:textColor="@color/white"
-                        android:textSize="18sp" />
+                        style="@style/radio_button_style"
+                        app:autoSizeMinTextSize="10sp"
+                        app:autoSizeMaxTextSize="100sp"
+                        app:autoSizeStepGranularity="2sp"
+                        app:autoSizeTextType="uniform"
+                        android:text="@string/female" />
                 </RadioGroup>
-            </LinearLayout>
             <CheckBox
                 android:id="@+id/signup_checkbox"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg"
+                style="@style/layout_style"
                 android:buttonTint="@color/white"
                 android:text="@string/status"
                 android:textColor="@color/white"
                 android:textSize="18sp" />
             <Spinner
                 android:id="@+id/signup_spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                style="@style/spinner_style"
                 android:layout_marginTop="10dp"
                 android:entries="@array/city_names"
-                android:popupBackground="@color/black"
-                android:backgroundTint="@color/white"
-                android:theme="@style/spinner"/>
+                android:theme="@style/BaseGrayTheam" />
             <Button
                 android:id="@+id/submit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="10dp"
-                android:background="@drawable/border"
-                android:focusableInTouchMode="true"
-                android:text="@string/signup_btn"
-                android:textColor="#ffffff"
-                android:textColorHint="#ffffff"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                style="@style/button_style"
+                android:text="@string/signup_btn" />
+            <TextView
+                android:id="@+id/login_link"
+                style="@style/textview_style"
+                android:background="@drawable/bg"
+                android:clickable="true"
+                android:onClick="login_link"
+                android:text="@string/login_link"
+                android:textSize="18sp" />
         </LinearLayout>
     </ScrollView>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -33,7 +34,6 @@ public class FileManagement extends AppCompatActivity {
         editTextDataFile = findViewById(R.id.editTextDataFile);
         filesView = findViewById(R.id.filesView);
     }
-
     public void readfile(View view) {
         FileInputStream fileInputStream = null;
         try {
@@ -65,9 +65,7 @@ public class FileManagement extends AppCompatActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
-
     public void viewfile(View view) {
 
         try {

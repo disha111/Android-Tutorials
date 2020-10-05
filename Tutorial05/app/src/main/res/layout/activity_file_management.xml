@@ -2,78 +2,72 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/bg"
+    android:id="@+id/constrainlayout"
+    style="@style/layout_style2"
     android:padding="14dp"
     tools:context=".FileManagement">
 
     <!--*****************"Tutorial 09"**********************-->
     <EditText
         android:id="@+id/editTextDataFile"
-        style="@style/edittext"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        style="@style/edittext_style"
+        android:layout_marginTop="20dp"
         android:autofillHints=""
         android:hint="@string/hint_string"
-        android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/readJSON_Filebtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/readJSON_Filebtn"
-        android:layout_width="135dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        style="@style/button_style"
         android:onClick="viewfile"
         android:text="@string/file_view"
-        app:layout_constraintEnd_toStartOf="@+id/writeFilebtn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDataFile" />
+        app:layout_constraintTop_toBottomOf="@+id/editTextDataFile"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/writeFilebtn"
-        android:layout_width="136dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        style="@style/button_style"
+        android:layout_marginTop="10dp"
         android:onClick="writefile"
         android:text="@string/file_write"
-        app:layout_constraintEnd_toStartOf="@+id/readFilebtn"
-        app:layout_constraintStart_toEndOf="@+id/readJSON_Filebtn"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDataFile" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/readJSON_Filebtn"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/readFilebtn"
-        android:layout_width="136dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        style="@style/button_style"
+        android:layout_marginTop="10dp"
         android:onClick="readfile"
         android:text="@string/file_read"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/writeFilebtn"
-        app:layout_constraintTop_toBottomOf="@+id/editTextDataFile" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/writeFilebtn"
+        tools:ignore="MissingConstraints" />
 
     <ScrollView
         android:id="@+id/fileViewScroll"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:paddingBottom="10dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/readJSON_Filebtn">
+        app:layout_constraintTop_toBottomOf="@+id/readFilebtn">
 
         <TextView
             android:id="@+id/filesView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:gravity="start"
-            android:textColor="@color/white"
-            android:textSize="16sp" />
+            style="@style/textview_style"
+            android:background="@drawable/bg"
+            android:gravity="start" />
     </ScrollView>
+
     <!--*****************"Tutorial 09"***********************-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>
