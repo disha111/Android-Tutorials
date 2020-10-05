@@ -36,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         String pref_email = preferences.getString("email","");
         if(!pref_email.equals("")){
             Intent intent = new Intent(MainActivity.this, Welcome.class);
+            intent.putExtra("temp",1);
             startActivity(intent);
             finish();
         }
@@ -59,7 +60,8 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(MainActivity.this,"You have Authenticated Successfully", Toast.LENGTH_SHORT).show();
                     //*****************"Tutorial 07"***********************
                     Intent intent = new Intent(MainActivity.this, Welcome.class);
-                   // tut 6   add value in SharedPreferences
+                    intent.putExtra("temp",1);
+                    // tut 6   add value in SharedPreferences
                     editor.putString("email",email.getText().toString().trim());
                     editor.commit();
                     startActivity(intent);

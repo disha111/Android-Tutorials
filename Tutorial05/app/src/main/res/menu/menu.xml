@@ -2,6 +2,8 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="File Handling"
         android:id="@+id/file_menu"/>
+    <item android:title="Online Users"
+        android:id="@+id/asyncTask"/>
     <item android:title="About"
         android:id="@+id/abt_menu"/>
     <item android:title="Logout"

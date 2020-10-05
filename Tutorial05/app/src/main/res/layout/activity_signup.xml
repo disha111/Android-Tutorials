@@ -1,38 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/layout_style2"
     tools:context=".Signup">
+
     <ScrollView
         android:id="@+id/scrollview"
-        style="@style/layout_style"
-        android:layout_margin="10dp"
+        style="@style/layout_style2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toTopOf="parent">
+
         <LinearLayout
             android:id="@+id/linearlayout"
             style="@style/layout_style"
             android:orientation="vertical"
-            android:paddingTop="20dp">
+            android:padding="16dp">
+
             <TextView
                 android:id="@+id/signup_textview"
                 style="@style/header_textview_style"
                 android:text="@string/signup_txt" />
+
             <EditText
                 android:id="@+id/signup_fname"
                 style="@style/edittext_style"
                 android:autofillHints=""
                 android:drawableStart="@drawable/user"
                 android:hint="@string/enter_first_name" />
+
             <EditText
                 android:id="@+id/signup_lname"
                 style="@style/edittext_style"
                 android:autofillHints=""
                 android:drawableStart="@drawable/user"
                 android:hint="@string/enter_last_name" />
+
             <EditText
                 android:id="@+id/signup_email"
                 style="@style/edittext_style"
@@ -40,6 +46,7 @@
                 android:drawableStart="@drawable/email"
                 android:hint="@string/signup_email"
                 android:inputType="textEmailAddress" />
+
             <EditText
                 android:id="@+id/signup_password"
                 style="@style/edittext_style"
@@ -49,60 +56,63 @@
                 android:inputType="textPassword"
                 android:longClickable="false" />
 
-                <RadioGroup
-                    android:id="@+id/signup_gender"
-                    style="@style/layout_style"
-                    android:padding="10dp"
-                    android:orientation="horizontal">
-                    <Switch
-                        android:id="@+id/signup_branch"
-                        style="@style/SwitchStyle"
-                        android:theme="@style/SwitchTheme"
-                        android:text="@string/branch_ce_it"
-                        tools:ignore="UseSwitchCompatOrMaterialXml" />
-                    <RadioButton
-                        android:id="@+id/signup_btn1"
-                        style="@style/radio_button_style"
-                        app:autoSizeTextType="none"
-                        app:autoSizeMinTextSize="10sp"
-                        app:autoSizeMaxTextSize="100sp"
-                        app:autoSizeStepGranularity="2sp"
-                        android:checked="true"
-                        android:text="@string/male" />
-                    <RadioButton
-                        android:id="@+id/signup_btn2"
-                        style="@style/radio_button_style"
-                        app:autoSizeMinTextSize="10sp"
-                        app:autoSizeMaxTextSize="100sp"
-                        app:autoSizeStepGranularity="2sp"
-                        app:autoSizeTextType="uniform"
-                        android:text="@string/female" />
-                </RadioGroup>
+            <RadioGroup
+                android:id="@+id/signup_gender"
+                style="@style/layout_style"
+                android:orientation="horizontal"
+                android:padding="10dp">
+
+                <Switch
+                    android:id="@+id/signup_branch"
+                    style="@style/SwitchStyle"
+                    android:text="@string/branch_ce_it"
+                    android:theme="@style/SwitchTheme"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                <RadioButton
+                    android:id="@+id/signup_btn1"
+                    style="@style/radio_button_style"
+                    android:checked="true"
+                    android:text="@string/male"
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
+
+                <RadioButton
+                    android:id="@+id/signup_btn2"
+                    style="@style/radio_button_style"
+                    android:text="@string/female"
+                    app:autoSizeMaxTextSize="100sp"
+                    app:autoSizeMinTextSize="10sp"
+                    app:autoSizeStepGranularity="2sp"
+                    app:autoSizeTextType="uniform" />
+            </RadioGroup>
+
             <CheckBox
                 android:id="@+id/signup_checkbox"
-                style="@style/layout_style"
-                android:buttonTint="@color/white"
-                android:text="@string/status"
-                android:textColor="@color/white"
-                android:textSize="18sp" />
+                style="@style/textview_style"
+                android:text="@string/status" />
+
             <Spinner
                 android:id="@+id/signup_spinner"
                 style="@style/spinner_style"
                 android:layout_marginTop="10dp"
                 android:entries="@array/city_names"
                 android:theme="@style/BaseGrayTheam" />
+
             <Button
                 android:id="@+id/submit"
                 style="@style/button_style"
                 android:text="@string/signup_btn" />
+
             <TextView
                 android:id="@+id/login_link"
                 style="@style/textview_style"
-                android:background="@drawable/bg"
+                android:gravity="center"
                 android:clickable="true"
                 android:onClick="login_link"
-                android:text="@string/login_link"
-                android:textSize="18sp" />
+                android:text="@string/login_link"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

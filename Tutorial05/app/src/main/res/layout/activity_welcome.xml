@@ -5,22 +5,31 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg"
-    android:padding="10dp"
     tools:context=".Welcome">
 
-    //*******************"Tutorial 08"*******************
+<!--    //*******************"Tutorial 08"*******************-->
+
     <ListView
         android:id="@+id/lstDataView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
+        style="@style/layout_style2"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
     </ListView>
 
-    //*******************"Tutorial 08"*******************
+    <ListView
+        android:id="@+id/onlineUsersView"
+        style="@style/layout_style2"
+        android:padding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
+
+<!--    //*******************"Tutorial 08"*******************-->
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -8,18 +8,17 @@
 
     <ScrollView
         android:id="@+id/scrollview"
-        style="@style/layout_style"
-        android:layout_margin="10dp"
+        style="@style/layout_style2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="MissingConstraints">
+        app:layout_constraintTop_toTopOf="parent" >
 
         <LinearLayout
             android:id="@+id/linearlayout"
             style="@style/layout_style"
             android:orientation="vertical"
-            android:paddingTop="20dp">
+            android:padding="16dp">
 
             <TextView
                 android:id="@+id/login_textview"
@@ -51,11 +50,10 @@
             <TextView
                 android:id="@+id/signup_link"
                 style="@style/textview_style"
-                android:background="@drawable/bg"
                 android:clickable="true"
                 android:onClick="signup_link"
-                android:text="@string/registerme"
-                android:textSize="18sp" />
+                android:gravity="center"
+                android:text="@string/registerme"/>
         </LinearLayout>
     </ScrollView>
 
