@@ -6,7 +6,7 @@
     <string name="app_name08">Tutorial 08</string>
     <string name="app_name09">Tutorial 09</string>
     <string name="app_name10">Tutorial 10</string>
-
+    <string name="app_name11">DemoVolley</string>
     <!-- Splash Screen -->
     <string name="tutorial_04">Welcome!</string>
 
@@ -56,4 +56,8 @@
     <string name="ProfileName">DJ</string>
     <string name="UserName">Disha Vaghela</string>
     <string name="UserGender">Female</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="city">City</string>
+    <string name="branch">Branch</string>
 </resources>

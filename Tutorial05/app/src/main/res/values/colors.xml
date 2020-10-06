@@ -9,4 +9,5 @@
     <color name="invalid">#FFFFFF</color>
     <color name="valid">#4CAF50</color>
     <color name="profilepic">#302D2D</color>
+    <color name="silver">#C0C0C0</color>
 </resources>

@@ -12,13 +12,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.GenericDeclaration;
-
 public class Display extends AppCompatActivity {
     //*******************"Tutorial 08"*******************
     TextView onlineDataView; //onlineDataView for Tutorial 10
     MyDatabaseHelper myDB;
     String userdata = "", valUserData = ""; //valUserData For Tutorial 10
+    String Address = "";
     //*******************"Tutorial 08"*******************
     int temp;
 
@@ -38,7 +37,6 @@ public class Display extends AppCompatActivity {
         OfflineUserBranch = findViewById(R.id.OfflineDisplayBranch);
         OfflineUserGender = findViewById(R.id.OfflineUserGender);
 
-
         //*******************"Tutorial 08"*******************
         Intent intent = getIntent();
         onlineDataView = findViewById(R.id.onlinedata_display);
@@ -51,11 +49,11 @@ public class Display extends AppCompatActivity {
             cursor.moveToFirst();
             OfflineProfileName.setText(cursor.getString(1).charAt(0)+""+cursor.getString(2).charAt(0));
             OfflineUserName.setText(cursor.getString(1) +" "+ cursor.getString(2));
-            OfflineUserEmail.setText("Email \n"+cursor.getString(3));
-            OfflineUserGender.setText(cursor.getString(5));
-            OfflineUserBranch.setText("Branch \n"+cursor.getString(6));
-            OfflineUserCity.setText("City \n"+cursor.getString(7));
-            OfflineUserPhone.setText("Phone\n"+cursor.getString(8));
+            OfflineUserEmail.setText(cursor.getString(3));
+            OfflineUserGender.setText(cursor.getString(6));
+            OfflineUserBranch.setText(cursor.getString(5));
+            OfflineUserCity.setText(cursor.getString(7));
+            OfflineUserPhone.setText(cursor.getString(8));
 //            display.setText(userdata);
             onlineDataView.setVisibility(View.GONE);
             setTitle(cursor.getString(1)+" Details");
@@ -63,30 +61,30 @@ public class Display extends AppCompatActivity {
         }
         else{
             //*******************"Tutorial 10"*******************
-
-            Toast.makeText(this, "Online data", Toast.LENGTH_SHORT).show();
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
             int position = intent.getIntExtra("userPosition", 0);
             try {
+
                 JSONObject object = MyUtil.jsonArray.getJSONObject(position);
-                valUserData += "Id : " + object.getString("id");
-                valUserData += "\nName : " + object.getString("name");
-                valUserData += "\nUsername : " + object.getString("username");
-                valUserData += "\nEmail : " + object.getString("email");
+                Toast.makeText(this, ""+object.getString("username"), Toast.LENGTH_SHORT).show();
+                setTitle(object.getString("username")+" Details");
+                OfflineProfileName.setText(object.getString("id"));
+                OfflineUserName.setText(object.getString("name"));
+                OfflineUserEmail.setText(object.getString("email"));
+                OfflineUserGender.setText(object.getString("username"));
                 JSONObject addressObj = object.getJSONObject("address");
-                valUserData += "\nAddress : " +
-                        addressObj.getString("street") + ", " +
+                OfflineUserCity.setText(addressObj.getString("street") + ", " +
                         addressObj.getString("suite") + ", " +
                         addressObj.getString("city") + ", " +
-                        addressObj.getString("zipcode");
-                valUserData += "\nPhone : " + object.getString("phone");
-                valUserData += "\nWebsite : " + object.getString("website");
+                        addressObj.getString("zipcode"));
+                OfflineUserPhone.setText(object.getString("phone"));
+                onlineDataView.setText(object.getString("website"));
                 JSONObject companyObj = object.getJSONObject("company");
-                valUserData += "\nAddress : " +
-                        companyObj.getString("name") + ", " +
+                OfflineUserBranch.setText(companyObj.getString("name") + ", " +
                         companyObj.getString("catchPhrase") + ", " +
-                        companyObj.getString("bs");
+                        companyObj.getString("bs"));
+              companyObj.getString("bs");
             } catch (JSONException e) {
                 e.printStackTrace();
             }

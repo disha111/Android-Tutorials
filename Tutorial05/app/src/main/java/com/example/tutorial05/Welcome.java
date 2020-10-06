@@ -2,7 +2,10 @@ package com.example.tutorial05;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.AlertDialog;
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
@@ -54,6 +57,7 @@ public class Welcome extends AppCompatActivity {
     ProgressDialog dialog;
     RequestQueue requestQueue;
     StringRequest stringRequest;
+    AlertDialog.Builder builder;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +73,8 @@ public class Welcome extends AppCompatActivity {
         int temp = getIntent().getIntExtra("temp",0);
 
         if(temp == 1){
-//            editor.putString("onlinedata", "off");
-//            editor.commit();
+            editor.putString("onlinedata", "off");
+            editor.commit();
             //*******************"Tutorial 08"*******************
             onlineUsersList.setVisibility(View.GONE);
             myDB = new MyDatabaseHelper(this);
@@ -104,14 +108,15 @@ public class Welcome extends AppCompatActivity {
                     intent.putExtra("username",username);
                     intent.putExtra("temp",2);
                     startActivity(intent);
+                    finish();
 
                 }
             });
             //*******************"Tutorial 08"*******************
         }
         else{
-//            editor.putString("onlinedata", "on");
-//            editor.commit();
+            editor.putString("onlinedata", "on");
+            editor.commit();
             mState = "HIDE_MENU";
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -124,14 +129,39 @@ public class Welcome extends AppCompatActivity {
                     Intent intent = new Intent(Welcome.this, Display.class);
                     intent.putExtra("userPosition",i);
                     intent.putExtra("temp",4);
-                    Toast.makeText(Welcome.this, "on in welcome", Toast.LENGTH_SHORT).show();
 
                     startActivity(intent);
+                    finish();
                 }
             });
-//            new MyAsyncTask().execute();
-            dialog = new ProgressDialog(Welcome.this);
-            volleyNetworkCall();
+            if(MyUtil.isOnline(this)){
+//                new MyAsyncTask().execute();
+                dialog = new ProgressDialog(Welcome.this);
+                volleyNetworkCall();
+            }else {
+                builder = new AlertDialog.Builder(this,R.style.DialogTheme);
+                builder.setTitle("No Internet Connection")
+                        .setMessage("You need to have Mobile Data or wifi to access this. Press Cancel to Exit")
+                        .setPositiveButton("Retry", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                Intent retryIntent = new Intent(Welcome.this, Welcome.class);
+                                retryIntent.putExtra("temp", 3);
+                                startActivity(retryIntent);
+                                finish();
+                            }
+                        })
+                        .setNeutralButton("Cancel", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                finish();
+                            }
+                        });
+                AlertDialog errorDialog = builder.create();
+                errorDialog.show();
+//                Button buttonPositive = errorDialog.getButton(DialogInterface.BUTTON_POSITIVE);
+//                buttonPositive.setTextColor(ContextCompat.getColor(this,R.color.red));
+            }
         }
 
 
@@ -172,10 +202,14 @@ public class Welcome extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent backIntent = new Intent(getApplicationContext(),Welcome.class);
-        backIntent.putExtra("temp",1);
-        startActivity(backIntent);
-        this.finish();
+        String on = preferences.getString("onlinedata","");
+        if(on=="on") {
+            Intent backIntent = new Intent(getApplicationContext(), Welcome.class);
+
+            backIntent.putExtra("temp", 1);
+            startActivity(backIntent);
+            this.finish();
+        }
     }
 
     @Override
@@ -214,6 +248,7 @@ public class Welcome extends AppCompatActivity {
                 Intent intent = new Intent(Welcome.this, Welcome.class);
                 intent.putExtra("temp",3);
                 startActivity(intent);
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);
