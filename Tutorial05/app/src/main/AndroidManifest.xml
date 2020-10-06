@@ -1,14 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.tutorial05">
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@drawable/micon"
         android:label="@string/app_name10"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Splash"
+        <activity android:name=".TestingDesignofDisplay"></activity>
+        <activity
+            android:name=".Splash"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.AppCompat.NoActionBar">
             <intent-filter>
@@ -17,21 +21,26 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:label="Login"
-            android:windowSoftInputMode="stateHidden"/>
-        <activity android:name=".Welcome"
-            android:label="Database Users"/>
-        <activity android:name=".Signup"
+            android:windowSoftInputMode="stateHidden" />
+        <activity
+            android:name=".Welcome"
+            android:label="Database Users" />
+        <activity
+            android:name=".Signup"
             android:label="@string/signup_txt"
             android:windowSoftInputMode="stateHidden" />
-        <activity android:name=".Display"
+        <activity
+            android:name=".Display"
             android:label="Users Data"
             android:parentActivityName=".Welcome" />
-        <activity android:name=".FileManagement"
+        <activity
+            android:name=".FileManagement"
             android:label="File Management"
-            android:windowSoftInputMode="stateHidden"
-            android:parentActivityName=".Welcome" />
+            android:parentActivityName=".Welcome"
+            android:windowSoftInputMode="stateHidden" />
     </application>
 
 </manifest>

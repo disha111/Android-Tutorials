@@ -2,14 +2,11 @@ package com.example.tutorial05;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -19,17 +16,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.ServerError;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import org.json.JSONArray;
 import org.json.JSONException;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-
 public class Welcome extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
@@ -44,6 +40,11 @@ public class Welcome extends AppCompatActivity {
     CustomAdapter onlineDataAdapter;
     ListView onlineUsersList;
 
+    //******************* Tutorial 11 Volley Object create and progress dialog**********************
+    RequestQueue requestQueue;
+    StringRequest stringRequest;
+    ProgressDialog dialog;
+    JsonArrayRequest jsonArrayRequest;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -118,12 +119,71 @@ public class Welcome extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-            new MyAsyncTask().execute();
+//            new MyAsyncTask().execute();
+            dialog = new ProgressDialog(Welcome.this);
+            VolleyNetworkCall();
         }
 
 
 
     }
+
+    private void VolleyNetworkCall() {
+
+//        jsonArrayRequest = new JsonArrayRequest(
+//                Request.Method.GET,
+//                MyUtil.URL_USERS,
+//                null,
+//                new Response.Listener<JSONArray>() {
+//                    @Override
+//                    public void onResponse(JSONArray response) {
+//                            MyUtil.jsonArray = response;
+//                            onlineDataAdapter = new CustomAdapter(Welcome.this,MyUtil.jsonArray);
+//                            onlineUsersList.setAdapter(onlineDataAdapter);
+//                            if(dialog.isShowing()){dialog.dismiss();}
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        Toast.makeText(Welcome.this, "Error...", Toast.LENGTH_SHORT).show();
+//                        if(dialog.isShowing()){dialog.dismiss();}
+//                    }
+//                }
+//        );
+
+        stringRequest = new StringRequest(Request.Method.GET,
+                MyUtil.URL_USERS,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            MyUtil.jsonArray = new JSONArray(response);
+                            onlineDataAdapter = new  CustomAdapter(Welcome.this,MyUtil.jsonArray);
+                            onlineUsersList.setAdapter(onlineDataAdapter);
+                            if(dialog.isShowing()){dialog.dismiss();}
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(Welcome.this, "Error...", Toast.LENGTH_SHORT).show();
+                        if (error instanceof ServerError) {
+                            Toast.makeText(Welcome.this, "onErrorResponse TimeoutError", Toast.LENGTH_SHORT).show();
+                        }
+                        if(dialog.isShowing()){dialog.dismiss();}
+                    }
+                });
+        requestQueue = Volley.newRequestQueue(Welcome.this);
+        dialog.show();
+        requestQueue.add(stringRequest);
+//        requestQueue.add(jsonArrayRequest);
+    }
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -174,47 +234,47 @@ public class Welcome extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    class MyAsyncTask extends AsyncTask {
-
-        ProgressDialog dialog;
-        StringBuilder strb;
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            dialog = new ProgressDialog(Welcome.this);
-            dialog.show();
-
-        }
-
-        @Override
-        protected Object doInBackground(Object[] objects) {
-
-            try {
-                URL url = new URL(MyUtil.URL_USERS);
-                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-                InputStreamReader reader = new InputStreamReader(urlConnection.getInputStream());
-                BufferedReader br = new BufferedReader(reader);
-                strb = new StringBuilder();
-                String onlineData = "";
-                while((onlineData = br.readLine())!=null){
-                    strb.append(onlineData);
-                }
-                Log.i("jsonString",strb.toString());
-                MyUtil.jsonArray = new JSONArray(strb.toString());
-
-            } catch (JSONException | IOException e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(Object o) {
-            super.onPostExecute(o);
-            onlineDataAdapter = new CustomAdapter(Welcome.this,MyUtil.jsonArray);
-            onlineUsersList.setAdapter(onlineDataAdapter);
-            if(dialog.isShowing()){dialog.dismiss();}
-        }
-    }
+//    class MyAsyncTask extends AsyncTask {
+//
+//        ProgressDialog dialog;
+//        StringBuilder strb;
+//
+//        @Override
+//        protected void onPreExecute() {
+//            super.onPreExecute();
+//            dialog = new ProgressDialog(Welcome.this);
+//            dialog.show();
+//
+//        }
+//
+//        @Override
+//        protected Object doInBackground(Object[] objects) {
+//
+//            try {
+//                URL url = new URL(MyUtil.URL_USERS);
+//                HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+//                InputStreamReader reader = new InputStreamReader(urlConnection.getInputStream());
+//                BufferedReader br = new BufferedReader(reader);
+//                strb = new StringBuilder();
+//                String onlineData = "";
+//                while((onlineData = br.readLine())!=null){
+//                    strb.append(onlineData);
+//                }
+//                Log.i("jsonString",strb.toString());
+//                MyUtil.jsonArray = new JSONArray(strb.toString());
+//
+//            } catch (JSONException | IOException e) {
+//                e.printStackTrace();
+//            }
+//            return null;
+//        }
+//
+//        @Override
+//        protected void onPostExecute(Object o) {
+//            super.onPostExecute(o);
+//            onlineDataAdapter = new CustomAdapter(Welcome.this,MyUtil.jsonArray);
+//            onlineUsersList.setAdapter(onlineDataAdapter);
+//            if(dialog.isShowing()){dialog.dismiss();}
+//        }
+//    }
 }

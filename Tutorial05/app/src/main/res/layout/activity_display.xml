@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constrainlayout"
     style="@style/layout_style2"
+    android:padding="10dp"
     tools:context=".Display">
 
     <androidx.cardview.widget.CardView
@@ -18,16 +19,123 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/dataViewConLayout"
             style="@style/layout_style2"
+            android:layout_height="485dp"
             android:padding="10dp">
 
 
             <TextView
-                android:id="@+id/wel_display"
+                android:id="@+id/OfflineProfileName"
                 style="@style/textview_style"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_width="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/circle"
+                android:gravity="center"
+                android:padding="10dp"
+                android:text="@string/ProfileName"
+                android:textSize="60sp"
+                app:layout_constraintBottom_toTopOf="@+id/OfflineUserName"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/OfflineUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/UserName"
+                android:textSize="34sp"
+                app:layout_constraintBottom_toTopOf="@+id/OfflineUserGender"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/OfflineProfileName" />
+
+            <TextView
+                android:id="@+id/OfflineUserGender"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:text="@string/UserGender"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/OfflineUserName" />
+
+
+            <TextView
+                android:id="@+id/OfflineDisplayCall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:drawableStartCompat="@drawable/displaycall"
+                app:layout_constraintEnd_toStartOf="@+id/OfflineDisplayVideo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/OfflineUserGender" />
+
+            <TextView
+                android:id="@+id/OfflineDisplayVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:drawableStartCompat="@drawable/displayvideo"
+                app:layout_constraintEnd_toStartOf="@+id/OfflineDisplayMsg"
+                app:layout_constraintStart_toEndOf="@+id/OfflineDisplayCall"
+                app:layout_constraintTop_toBottomOf="@+id/OfflineUserGender"
+                tools:ignore="InvalidId" />
+
+            <TextView
+                android:id="@+id/OfflineDisplayMsg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:drawableStartCompat="@drawable/displayemail"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/OfflineDisplayVideo"
+                app:layout_constraintTop_toBottomOf="@+id/OfflineUserGender"
+                tools:ignore="InvalidId" />
+
+            <TextView
+                android:id="@+id/OfflineDisplayPhone"
+                style="@style/textview_style"
+                android:layout_marginTop="16dp"
+                android:text="Phone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/OfflineDisplayCall" />
+
+            <TextView
+                android:id="@+id/OfflineDisplayEmail"
+                style="@style/textview_style"
+                android:layout_marginTop="16dp"
+                android:text="Email"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/OfflineDisplayPhone" />
+
+            <TextView
+                android:id="@+id/OfflineDisplayCity"
+                style="@style/textview_style"
+                android:layout_marginTop="16dp"
+                android:text="City"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/OfflineDisplayEmail" />
+
+            <TextView
+                android:id="@+id/OfflineDisplayBranch"
+                style="@style/textview_style"
+                android:layout_marginTop="16dp"
+                android:text="Branch"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/OfflineDisplayCity" />
 
             <TextView
                 android:id="@+id/onlinedata_display"

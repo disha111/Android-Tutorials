@@ -15,7 +15,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final int DATABASE_VERSION = 1;
-    private static final String DATABASE_NAME = "student_details.db";
+    private static final String DATABASE_NAME = "student_detail.db";
     //common column names....
     private static final String COLUMN_ID = "id";
     private static  final String user_id = "email";
@@ -27,6 +27,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     private static  final String branch = "branch";
     private static  final String gen = "gender";
     private static  final String location = "city";
+    private static  final String phone = "phone";
     String Branch_val = "Other";
 
     public MyDatabaseHelper(@Nullable Context context) {
@@ -42,7 +43,8 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 pass + " TEXT, " +
                 branch + " TEXT, " +
                 gen + " TEXT, " +
-                location + " TEXT);";
+                location + " TEXT, " +
+                phone + " TEXT);";
         db.execSQL(query);
     }
     @Override
@@ -51,7 +53,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public boolean reg_insert(String firstname, String lastname, String email,Boolean field, String password, String gender, String city){
+    public boolean reg_insert(String firstname, String lastname, String email,Boolean field, String password, String gender, String city,String phone_no){
         SQLiteDatabase db = this.getWritableDatabase();
         if (field) {
             Branch_val = "Branch CE/IT";
@@ -64,6 +66,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         values.put(gen,gender);
         values.put(branch,Branch_val);
         values.put(location,city);
+        values.put(phone,phone_no);
 
         long res = db.insert(Signup_Table_Name,branch,values);
         return (res==-1)?false:true;

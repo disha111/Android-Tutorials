@@ -21,7 +21,7 @@ import android.widget.Toast;
 import java.lang.annotation.Native;
 
 public class Signup extends AppCompatActivity {
-    EditText fname,lname,email,password;
+    EditText fname,lname,email,password,phone;
     RadioGroup gender;
     RadioButton Gender;
     CheckBox checkBox;
@@ -44,6 +44,7 @@ public class Signup extends AppCompatActivity {
         branch = findViewById(R.id.signup_branch);
         checkBox = findViewById(R.id.signup_checkbox);
         city = findViewById(R.id.signup_spinner);
+        phone = findViewById(R.id.signup_phone);
         signup = findViewById(R.id.submit);
 
         signup.setOnClickListener(new View.OnClickListener() {
@@ -55,16 +56,17 @@ public class Signup extends AppCompatActivity {
                 String Email = email.getText().toString().trim();
                 Boolean Email_val = email.getText().toString().trim().isEmpty();
                 String Password = password.getText().toString().trim();
+                String Phone = phone.getText().toString().trim();
                 Boolean Password_val = password.getText().toString().trim().isEmpty();
                 Boolean Branch = branch.isChecked();
                 int id = gender.getCheckedRadioButtonId();
                 String set_city = city.getSelectedItem().toString();
 
-                if(!Fname && !Lname && !Email_val && !Password_val && Patterns.EMAIL_ADDRESS.matcher(Email).matches() && Password.length()>=8 && !set_city.equals("Select Your City...")){
+                if(!Fname && !Lname && !Email_val && !Password_val && Patterns.EMAIL_ADDRESS.matcher(Email).matches() && Password.length()>=8 && !set_city.equals("Select Your City...") && phone.length()==10){
                     Gender = findViewById(id);
                     //*****************"Tutorial 07"***********************
                     mydb = new MyDatabaseHelper(Signup.this);
-                    Boolean res=mydb.reg_insert(fname.getText().toString().trim(),lname.getText().toString().trim(),Email,Branch,Password,Gender.getText().toString(),set_city);
+                    Boolean res=mydb.reg_insert(fname.getText().toString().trim(),lname.getText().toString().trim(),Email,Branch,Password,Gender.getText().toString(),set_city,phone.getText().toString());
                     Intent intent = new Intent(Signup.this,MainActivity.class);
                     if(res){
                         Toast.makeText(Signup.this, "Registered Successfully", Toast.LENGTH_SHORT).show();
@@ -100,6 +102,15 @@ public class Signup extends AppCompatActivity {
                             password.setError("Password to short");
                         }
                     }
+                    if(Phone.isEmpty()){
+                        phone.setError("Phone No is Invalid");
+                    }
+                    else{
+                        if(Password.length()<8) {
+                            phone.setError("Phone No must be 10 Degits");
+                        }
+                    }
+
                     if(set_city.equals("Select Your City...")){
                         TextView textView = (TextView) city.getSelectedView();
                         textView.setError("Selected Item is Invalid");

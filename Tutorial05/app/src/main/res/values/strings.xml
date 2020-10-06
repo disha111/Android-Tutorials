@@ -53,4 +53,7 @@
     <string name="empty"></string>
     <string name="first_textview">First TextView</string>
     <string name="second_textview">Second TextView</string>
+    <string name="ProfileName">DJ</string>
+    <string name="UserName">Disha Vaghela</string>
+    <string name="UserGender">Female</string>
 </resources>

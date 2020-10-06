@@ -12,20 +12,34 @@ import androidx.appcompat.app.AppCompatActivity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.reflect.GenericDeclaration;
+
 public class Display extends AppCompatActivity {
     //*******************"Tutorial 08"*******************
-    TextView display, onlineDataView; //onlineDataView for Tutorial 10
+    TextView onlineDataView; //onlineDataView for Tutorial 10
     MyDatabaseHelper myDB;
     String userdata = "", valUserData = ""; //valUserData For Tutorial 10
     //*******************"Tutorial 08"*******************
     int temp;
+
+    //****************************** Offline data display controls assign here.... *****************************************
+    TextView OfflineUserName,OfflineUserEmail,OfflineUserPhone,OfflineUserCity,OfflineUserBranch,OfflineUserGender,OfflineProfileName;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
 
+        //**************************** Offline data display controls Connection here.... ****************************************
+        OfflineProfileName = findViewById(R.id.OfflineProfileName);
+        OfflineUserName = findViewById(R.id.OfflineUserName);
+        OfflineUserEmail = findViewById(R.id.OfflineDisplayEmail);
+        OfflineUserPhone = findViewById(R.id.OfflineDisplayPhone);
+        OfflineUserCity = findViewById(R.id.OfflineDisplayCity);
+        OfflineUserBranch = findViewById(R.id.OfflineDisplayBranch);
+        OfflineUserGender = findViewById(R.id.OfflineUserGender);
+
+
         //*******************"Tutorial 08"*******************
-        display = findViewById(R.id.wel_display);
         Intent intent = getIntent();
         onlineDataView = findViewById(R.id.onlinedata_display);
         temp = intent.getIntExtra("temp",0);
@@ -35,15 +49,16 @@ public class Display extends AppCompatActivity {
             Toast.makeText(Display.this, username, Toast.LENGTH_SHORT).show();
             Cursor cursor = myDB.getPartUserData(username);
             cursor.moveToFirst();
-            userdata += cursor.getString(1);
-            userdata += "\n" + cursor.getString(2);
-            userdata += "\n" + cursor.getString(3);
-            userdata += "\n" + cursor.getString(4);
-            userdata += "\n" + cursor.getString(5);
-            userdata += "\n" + cursor.getString(6);
-            userdata += "\n" + cursor.getString(7);
-            display.setText(userdata);
+            OfflineProfileName.setText(cursor.getString(1).charAt(0)+""+cursor.getString(2).charAt(0));
+            OfflineUserName.setText(cursor.getString(1) +" "+ cursor.getString(2));
+            OfflineUserEmail.setText("Email \n"+cursor.getString(3));
+            OfflineUserGender.setText(cursor.getString(5));
+            OfflineUserBranch.setText("Branch \n"+cursor.getString(6));
+            OfflineUserCity.setText("City \n"+cursor.getString(7));
+            OfflineUserPhone.setText("Phone\n"+cursor.getString(8));
+//            display.setText(userdata);
             onlineDataView.setVisibility(View.GONE);
+            setTitle(cursor.getString(1)+" Details");
             //*******************"Tutorial 08"*******************
         }
         else{
@@ -76,7 +91,6 @@ public class Display extends AppCompatActivity {
                 e.printStackTrace();
             }
             onlineDataView.setText(valUserData);
-            display.setVisibility(View.GONE);
         }
     }
 

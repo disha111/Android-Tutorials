@@ -56,6 +56,13 @@
                 android:inputType="textPassword"
                 android:longClickable="false" />
 
+            <EditText
+                android:id="@+id/signup_phone"
+                style="@style/edittext_style"
+                android:hint="Enter Phone Number"
+                android:drawableStart="@drawable/call"
+                android:inputType="phone" />
+
             <RadioGroup
                 android:id="@+id/signup_gender"
                 style="@style/layout_style"
