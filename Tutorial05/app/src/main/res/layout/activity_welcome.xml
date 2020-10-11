@@ -7,7 +7,7 @@
     android:background="@drawable/bg"
     tools:context=".Welcome">
 
-<!--    //*******************"Tutorial 08"*******************-->
+    <!--    //*******************"Tutorial 08"*******************-->
 
     <ListView
         android:id="@+id/lstDataView"
@@ -31,5 +31,6 @@
 
     </ListView>
 
-<!--    //*******************"Tutorial 08"*******************-->
+
+    <!--    //*******************"Tutorial 08"*******************-->
 </androidx.constraintlayout.widget.ConstraintLayout>

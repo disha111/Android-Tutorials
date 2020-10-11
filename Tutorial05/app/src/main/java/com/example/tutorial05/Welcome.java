@@ -36,7 +36,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.URL;
 
 public class Welcome extends AppCompatActivity {
@@ -58,7 +57,6 @@ public class Welcome extends AppCompatActivity {
     RequestQueue requestQueue;
     StringRequest stringRequest;
     AlertDialog.Builder builder;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,6 +73,7 @@ public class Welcome extends AppCompatActivity {
         if(temp == 1){
             editor.putString("onlinedata", "off");
             editor.commit();
+
             //*******************"Tutorial 08"*******************
             onlineUsersList.setVisibility(View.GONE);
             myDB = new MyDatabaseHelper(this);
@@ -117,6 +116,7 @@ public class Welcome extends AppCompatActivity {
         else{
             editor.putString("onlinedata", "on");
             editor.commit();
+
             mState = "HIDE_MENU";
             getSupportActionBar().setHomeButtonEnabled(true);
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -193,6 +193,30 @@ public class Welcome extends AppCompatActivity {
                     }
                 }
         );
+//        stringRequest = new StringRequest(
+//                Request.Method.GET,
+//                MyUtil.URL_USERS,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try {
+//                            MyUtil.jsonArray = new JSONArray(response);
+//                            onlineDataAdapter = new CustomAdapter(Welcome.this,MyUtil.jsonArray);
+//                            onlineUsersList.setAdapter(onlineDataAdapter);
+//                            if(dialog.isShowing()) dialog.dismiss();
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//                        if(dialog.isShowing()) dialog.dismiss();
+//                    }
+//                }
+//        );
 
         requestQueue = Volley.newRequestQueue(Welcome.this);
         dialog.show();
@@ -237,7 +261,7 @@ public class Welcome extends AppCompatActivity {
             case R.id.lgt_menu:
                 editor.remove("email");
                 editor.commit();
-                startActivity(new Intent(Welcome.this,MainActivity.class));
+                startActivity(new Intent(Welcome.this, MainActivity.class));
                 finish();
                 break;
             //*******************"Tutorial 09"*******************
@@ -250,6 +274,12 @@ public class Welcome extends AppCompatActivity {
                 startActivity(intent);
                 finish();
                 break;
+            case R.id.recyclerView:
+                Intent rcv_intent = new Intent(Welcome.this, RecyclerViewDemo.class);
+                rcv_intent.putExtra("temp",3);
+                startActivity(rcv_intent);
+                break;
+
         }
         return super.onOptionsItemSelected(item);
     }

@@ -22,7 +22,7 @@ public class Display extends AppCompatActivity {
     int temp;
 
     //****************************** Offline data display controls assign here.... *****************************************
-    TextView OfflineUserName,OfflineUserEmail,OfflineUserPhone,OfflineUserCity,OfflineUserBranch,OfflineUserGender,OfflineProfileName;
+    TextView OfflineUserName,OfflineUserEmail,OfflineUserPhone,OfflineUserCity,OfflineUserBranch,OfflineUserGender,OfflineProfileName,OffineBranchLable,OfflineCityLable;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +44,6 @@ public class Display extends AppCompatActivity {
         if(temp == 2){
             myDB = new MyDatabaseHelper(this);
             String username = intent.getStringExtra("username");
-            Toast.makeText(Display.this, username, Toast.LENGTH_SHORT).show();
             Cursor cursor = myDB.getPartUserData(username);
             cursor.moveToFirst();
             OfflineProfileName.setText(cursor.getString(1).charAt(0)+""+cursor.getString(2).charAt(0));
@@ -57,6 +56,7 @@ public class Display extends AppCompatActivity {
 //            display.setText(userdata);
             onlineDataView.setVisibility(View.GONE);
             setTitle(cursor.getString(1)+" Details");
+//            Toast.makeText(Display.this, ""+cursor.getString(1), Toast.LENGTH_SHORT).show();
             //*******************"Tutorial 08"*******************
         }
         else{
@@ -67,7 +67,7 @@ public class Display extends AppCompatActivity {
             try {
 
                 JSONObject object = MyUtil.jsonArray.getJSONObject(position);
-                Toast.makeText(this, ""+object.getString("username"), Toast.LENGTH_SHORT).show();
+//                Toast.makeText(this, ""+object.getString("username"), Toast.LENGTH_SHORT).show();
                 setTitle(object.getString("username")+" Details");
                 OfflineProfileName.setText(object.getString("id"));
                 OfflineUserName.setText(object.getString("name"));
@@ -84,6 +84,10 @@ public class Display extends AppCompatActivity {
                 OfflineUserBranch.setText(companyObj.getString("name") + ", " +
                         companyObj.getString("catchPhrase") + ", " +
                         companyObj.getString("bs"));
+                OfflineCityLable = findViewById(R.id.CityLable);
+                OfflineCityLable.setText("Address");
+                OffineBranchLable = findViewById(R.id.BranchLable);
+                OffineBranchLable.setText("Company Address");
               companyObj.getString("bs");
             } catch (JSONException e) {
                 e.printStackTrace();

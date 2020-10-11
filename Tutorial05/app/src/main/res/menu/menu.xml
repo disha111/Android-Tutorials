@@ -4,6 +4,8 @@
         android:id="@+id/file_menu"/>
     <item android:title="Online Users"
         android:id="@+id/asyncTask"/>
+    <item android:title="Recycler View"
+        android:id="@+id/recyclerView"/>
     <item android:title="About"
         android:id="@+id/abt_menu"/>
     <item android:title="Logout"
