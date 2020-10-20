@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/layout_style2"
@@ -56,11 +55,26 @@
                 android:inputType="textPassword"
                 android:longClickable="false" />
 
+            <com.hbb20.CountryCodePicker
+                android:id="@+id/ccp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/border"
+                android:padding="5dp"
+                app:ccp_autoDetectCountry="true"
+                app:ccp_contentColor="@color/white"
+                app:ccp_showFlag="true"
+                app:ccp_showFullName="true"
+                app:ccp_showNameCode="true"
+                app:ccpDialog_backgroundColor="@color/secondary_text"
+                app:ccpDialog_textColor="@color/invalid"/>
+
             <EditText
                 android:id="@+id/signup_phone"
                 style="@style/edittext_style"
-                android:hint="Enter Phone Number"
                 android:drawableStart="@drawable/call"
+                android:hint="Enter Phone Number"
                 android:inputType="phone" />
 
             <RadioGroup
@@ -116,10 +130,10 @@
             <TextView
                 android:id="@+id/login_link"
                 style="@style/textview_style"
-                android:gravity="center"
                 android:clickable="true"
+                android:gravity="center"
                 android:onClick="login_link"
-                android:text="@string/login_link"/>
+                android:text="@string/login_link" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

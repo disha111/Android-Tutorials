@@ -1,4 +1,4 @@
-package com.example.tutorial05;
+package classes;
 
 import android.content.Context;
 import android.graphics.Color;
@@ -7,6 +7,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.example.tutorial05.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;

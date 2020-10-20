@@ -61,4 +61,9 @@
     <string name="email">Email</string>
     <string name="city">City</string>
     <string name="branch">Branch</string>
+
+
+
+    <!--        Animation             -->
+    <string name="anim_duration_medium">1000</string>
 </resources>

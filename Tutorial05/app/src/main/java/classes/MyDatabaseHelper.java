@@ -1,11 +1,12 @@
 //*****************"Tutorial 07"***********************
-package com.example.tutorial05;
+package classes;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -71,6 +72,25 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
         long res = db.insert(Signup_Table_Name,branch,values);
         return (res==-1)?false:true;
     }
+    public boolean reg_update(String firstname, String lastname, String email,Boolean field, String password, String gender, String city,String phone_no,String old_email){
+        SQLiteDatabase db = this.getWritableDatabase();
+        if (field) {
+            Branch_val = "Branch CE/IT";
+        }
+        ContentValues values = new ContentValues();
+        values.put(fname,firstname);
+        values.put(lname,lastname);
+        values.put(user_id,email);
+        values.put(pass,password);
+        values.put(gen,gender);
+        values.put(branch,Branch_val);
+        values.put(location,city);
+        values.put(phone,phone_no);
+        String whereClause = "email=?";
+        String whereArgs[] = {old_email};
+        long res = db.update(Signup_Table_Name,values,whereClause,whereArgs);
+        return (res==-1)?false:true;
+    }
 
     public Cursor checkLogin(String username, String password) {
         SQLiteDatabase db = this.getWritableDatabase();
@@ -87,6 +107,7 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<String> getUserList(){
         SQLiteDatabase db = getReadableDatabase();
         ArrayList<String> list = new ArrayList<>();
+//        ArrayList<String> userName = new ArrayList<>();
         Cursor cursor = db.query(
                 Signup_Table_Name,
                 new String[]{user_id},
@@ -100,8 +121,10 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
             cursor.moveToFirst();
             do{
                 list.add(cursor.getString(0));
+//                userName.add(cursor.getString(1)+" "+cursor.getString(2));
             }while (cursor.moveToNext());
         }
+//        return userName;
         return list;
     }
 
@@ -117,6 +140,14 @@ public class MyDatabaseHelper extends SQLiteOpenHelper {
                 null
         );
         return cursor;
+    }
+
+    public boolean reg_delete(String email) {
+        SQLiteDatabase db = getReadableDatabase();
+        String whereClause = "email=?";
+        String whereArgs[] = {email};
+        long res = db.delete(Signup_Table_Name, whereClause,whereArgs);
+        return (res==-1)?false:true;
     }
     //*****************"Tutorial 08"***********************
 }

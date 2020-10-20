@@ -2,6 +2,8 @@ package com.example.tutorial05;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -37,6 +39,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
+
+import classes.CustomAdapter;
+import classes.MyDatabaseHelper;
+import classes.MyUtil;
+import classes.OfflineDataAdapter;
 
 public class Welcome extends AppCompatActivity {
     SharedPreferences preferences;
@@ -57,14 +65,28 @@ public class Welcome extends AppCompatActivity {
     RequestQueue requestQueue;
     StringRequest stringRequest;
     AlertDialog.Builder builder;
+
+    ArrayList<String> list;
+    OfflineDataAdapter OflineData;
+    RecyclerView userRecyclerView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
+
         // tut 6   get value from SharedPreferences
+        //*********************** Assign value... ****************************
         preferences = getSharedPreferences("Session",MODE_PRIVATE);
         editor = preferences.edit();
-        lstData = findViewById(R.id.lstDataView);
+
+        if(preferences.getString("email","").equals("")){
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
+
+
+//        preferences = getSharedPreferences("Session",MODE_PRIVATE);
+//        editor = preferences.edit();
         onlineUsersList = findViewById(R.id.onlineUsersView);
 
 
@@ -78,39 +100,12 @@ public class Welcome extends AppCompatActivity {
             onlineUsersList.setVisibility(View.GONE);
             myDB = new MyDatabaseHelper(this);
 
-            adapter = new ArrayAdapter<String>(
-                    this,
-                    android.R.layout.simple_list_item_1,
-//                data,
-                    myDB.getUserList()
-            ){@Override
-            public View getView(int position, View convertView, ViewGroup parent) {
-                // Get the Item from ListView
-                View view = super.getView(position, convertView, parent);
+            userRecyclerView = findViewById(R.id.UserRecyclerView);
+            userRecyclerView.setLayoutManager(new LinearLayoutManager(Welcome.this));
+            list = myDB.getUserList();
+            OflineData = new OfflineDataAdapter(Welcome.this,list);
+            userRecyclerView.setAdapter(OflineData);
 
-                // Initialize a TextView for ListView each Item
-                TextView tv = (TextView) view.findViewById(android.R.id.text1);
-
-                // Set the text color of TextView (ListView Item)
-                tv.setTextColor(Color.RED);
-
-                // Generate ListView Item using TextView
-                return view;
-            }
-            };
-            lstData.setAdapter(adapter);
-            lstData.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                @Override
-                public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                    String username = ((TextView)view).getText().toString();
-                    Intent intent = new Intent(Welcome.this,Display.class);
-                    intent.putExtra("username",username);
-                    intent.putExtra("temp",2);
-                    startActivity(intent);
-                    finish();
-
-                }
-            });
             //*******************"Tutorial 08"*******************
         }
         else{
@@ -249,6 +244,8 @@ public class Welcome extends AppCompatActivity {
             for (int i = 0; i < menu.size(); i++)
                 menu.getItem(i).setVisible(false);
         }
+        menu.findItem(R.id.edit_menu).setVisible(false);
+        menu.findItem(R.id.delete_menu).setVisible(false);
         return super.onCreateOptionsMenu(menu);
     }
     // Tut 6 Select menu item..

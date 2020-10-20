@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import classes.MyDatabaseHelper;
+
 public class MainActivity extends AppCompatActivity {
     Button login;
     EditText email,pass;
@@ -79,7 +81,10 @@ public class MainActivity extends AppCompatActivity {
         });
     }
     public void signup_link(View view) {
-        startActivity(new Intent(MainActivity.this,Signup.class));
+        Intent intent = new Intent(MainActivity.this, Signup.class);
+        intent.putExtra("edit",0);
+        startActivity(intent);
+        finish();
 
     }
 }

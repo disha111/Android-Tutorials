@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--*******************"Tutorial 10 (onlineUsers Name & Email)"*******************-->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/linearlayout"
+    android:id="@+id/listlinearlayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="5dp"
@@ -16,6 +16,11 @@
         android:textColor="@color/link"
         android:textSize="20sp" />
 
+    <TextView
+        android:id="@+id/ListEmail"
+        style="@style/textview_style"
+        android:visibility="gone"
+        android:textColor="@color/link"/>
     <LinearLayout
         android:id="@+id/inner_linearlayout"
         android:layout_width="match_parent"

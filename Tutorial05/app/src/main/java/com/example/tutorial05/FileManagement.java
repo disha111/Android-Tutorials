@@ -20,60 +20,39 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import classes.MyUtil;
+
 public class FileManagement extends AppCompatActivity {
-//    //******"Extra session management (For setting menu for multiActivity)"*******
-//    SharedPreferences preferences;
-//    SharedPreferences.Editor editor;
-//    String onlinedata;
-    //    ********************TUTORIAL09***************************************************
-    final String FILE_ASSETS = "data.json";
-    final String FILE_INTERNAL = "data.txt";
-    EditText editTextDataFile;
+     EditText editTextDataFile;
     TextView filesView;
+
+    //***************************** Sharedpreferences... ****************************************
+    SharedPreferences preferences;
+    SharedPreferences.Editor editor;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_file_management);
+
+        //*********************** Assign value... ****************************
+        preferences = getSharedPreferences("Session",MODE_PRIVATE);
+        editor = preferences.edit();
+
+        if(preferences.getString("email","").equals("")){
+            startActivity(new Intent(this, MainActivity.class));
+            finish();
+        }
         //    ********************TUTORIAL09***************************************************
         editTextDataFile = findViewById(R.id.editTextDataFile);
         filesView = findViewById(R.id.filesView);
-        //******"Extra session management (For setting menu for multiActivity)"*******
-//
-//        getSupportActionBar().setHomeButtonEnabled(true);
-//        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//
-//        //****************** preferences **********************
-//        preferences = getSharedPreferences("Session",MODE_PRIVATE);
-//        editor = preferences.edit();
-//        onlinedata = preferences.getString("onlinedata","");
+
     }
-    //******"Extra session management (For managing back button)*******
-//    @Override
-//    public void onBackPressed() {
-//        super.onBackPressed();
-//        Intent backIntent = new Intent(getApplicationContext(),Welcome.class);
-//        //******** Tutorial 10 Back Arrow **************
-//        if(onlinedata=="on"){
-//            backIntent.putExtra("temp",3);
-//        }
-//        else{
-//            backIntent.putExtra("temp",1);
-//        }
-//        startActivity(backIntent);
-//        this.finish();
-//    }
-//
-//    @Override
-//    public boolean onSupportNavigateUp() {
-//        onBackPressed();
-//        return true;
-//    }
     public void readfile(View view) {
         FileInputStream fileInputStream = null;
         try {
-            fileInputStream = openFileInput(FILE_INTERNAL);
+            fileInputStream = openFileInput(MyUtil.FILE_INTERNAL);
             int c;
             String temp = "";
             while((c = fileInputStream.read())!= -1) {
@@ -90,7 +69,7 @@ public class FileManagement extends AppCompatActivity {
 
     public void writefile(View view) {
         try {
-            FileOutputStream fileOutputStream = openFileOutput(FILE_INTERNAL, Context.MODE_PRIVATE);
+            FileOutputStream fileOutputStream = openFileOutput(MyUtil.FILE_INTERNAL, Context.MODE_PRIVATE);
             String val = editTextDataFile.getText().toString();
             fileOutputStream.write(val.getBytes());
             fileOutputStream.close();
@@ -105,7 +84,7 @@ public class FileManagement extends AppCompatActivity {
     public void viewfile(View view) {
 
         try {
-            InputStream inputStream = getAssets().open(FILE_ASSETS);
+            InputStream inputStream = getAssets().open(MyUtil.FILE_ASSETS);
             InputStreamReader reader = new InputStreamReader(inputStream);
             BufferedReader bufferedReader = new BufferedReader(reader);
             StringBuilder stringBuilder = new StringBuilder();
