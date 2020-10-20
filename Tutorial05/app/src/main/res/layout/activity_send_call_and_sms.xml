@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/layout_style2"
+    android:padding="10dp"
+    tools:context=".SendCallAndSms">
+
+    <com.hbb20.CountryCodePicker
+        android:id="@+id/ccp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/border"
+        android:padding="5dp"
+        app:ccp_autoDetectCountry="true"
+        app:ccp_contentColor="@color/white"
+        app:ccp_showFlag="true"
+        app:ccp_showFullName="true"
+        app:ccp_showNameCode="true"
+        app:ccpDialog_backgroundColor="@color/secondary_text"
+        app:ccpDialog_textColor="@color/invalid"
+        tools:ignore="MissingConstraints" />
+
+    <EditText
+        android:id="@+id/callPhoneNumber"
+        style="@style/edittext_style"
+        android:autofillHints=""
+        android:hint="@string/enter_phone_number"
+        android:inputType="phone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ccp" />
+
+    <EditText
+        android:id="@+id/smsText"
+        android:inputType="textPersonName"
+        style="@style/edittext_style"
+        android:hint="@string/enter_text_here"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/callPhoneNumber"
+        android:autofillHints="" />
+
+    <LinearLayout
+        android:id="@+id/linearlaoutButtons"
+        style="@style/layout_style"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/smsText">
+
+        <Button
+            android:id="@+id/button"
+            style="@style/button_style"
+            android:layout_width="wrap_content"
+            android:text="@string/call"
+            android:layout_weight="5"
+            android:onClick="makecall"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/button2"
+            tools:layout_editor_absoluteY="154dp" />
+
+        <Button
+            android:id="@+id/button2"
+            style="@style/button_style"
+            android:layout_width="wrap_content"
+            android:text="@string/sms"
+            android:layout_weight="5"
+            android:onClick="sendsms"
+            app:layout_constraintEnd_toStartOf="@+id/button"
+            app:layout_constraintHorizontal_bias="0.294"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:layout_editor_absoluteY="154dp" />
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

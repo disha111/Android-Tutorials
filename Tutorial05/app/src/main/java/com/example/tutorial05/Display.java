@@ -4,6 +4,7 @@ import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -66,30 +68,16 @@ public class Display extends AppCompatActivity {
         OfflineUserGender = findViewById(R.id.OfflineUserGender);
 
         //*******************  Tutorial13 *********************
+
+
         TextView call = findViewById(R.id.OfflineDisplayCall);
-            call.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    if(iscallPermission()){
-                        Toast.makeText(Display.this, "calling", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(Intent.ACTION_CALL);
-                        intent.setData(Uri.parse("tel:"+OfflineUserPhone.getText().toString()));
-                        startActivity(intent);
-                    }
-                }
-
-                private boolean iscallPermission() {
-                    if(Build.VERSION.SDK_INT >= 23){
-
-                    }
-                    return true;
-                }
-            });
-        TextView sms = findViewById(R.id.OfflineDisplayMsg);
-        sms.setOnClickListener(new View.OnClickListener() {
+        call.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(Display.this, "SMS", Toast.LENGTH_SHORT).show();
+                if(iscallPermission()){
+                    Toast.makeText(Display.this, "calling", Toast.LENGTH_SHORT).show();
+                    makecall();
+                }
             }
         });
 
@@ -156,6 +144,8 @@ public class Display extends AppCompatActivity {
         }
     }
 
+
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -165,7 +155,7 @@ public class Display extends AppCompatActivity {
         }else {
             intent.putExtra("temp",1);
         }
-        startActivity(intent);
+         startActivity(intent);
         this.finish();
     }
 
@@ -184,6 +174,7 @@ public class Display extends AppCompatActivity {
         menu.findItem(R.id.asyncTask).setVisible(false);
         menu.findItem(R.id.recyclerView).setVisible(false);
         menu.findItem(R.id.lgt_menu).setVisible(false);
+        menu.findItem(R.id.callAndSMS).setVisible(false);
         menu.findItem(R.id.edit_menu).setVisible(true);
         menu.findItem(R.id.delete_menu).setVisible(true);
         return super.onCreateOptionsMenu(menu);
@@ -261,4 +252,40 @@ public class Display extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+//************************ Tutorial13 ************************
+private boolean iscallPermission() {
+    if(Build.VERSION.SDK_INT >= 23){
+        if(checkSelfPermission(Manifest.permission.CALL_PHONE) ==PackageManager.PERMISSION_GRANTED){
+            return true;
+        }
+        else{
+            ActivityCompat.requestPermissions(Display.this,new String[]{Manifest.permission.CALL_PHONE},11);
+            return false;
+        }
+    }
+    else{
+        return true;
+    }
+}
+
+    public void onRequestPermissionsResult(int requestCode,String permissions[],int[] grantResults){
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        switch (requestCode){
+            case 11:
+                if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    makecall();
+                    Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                }
+                break;
+        }
+    }
+    private void makecall() {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:"+OfflineUserPhone.getText().toString()));
+        startActivity(intent);
+    }
+//************************ Tutorial13 ************************
 }

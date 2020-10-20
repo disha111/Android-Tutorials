@@ -8,6 +8,7 @@
     <string name="app_name10">Tutorial 10</string>
     <string name="app_name11">DemoVolley</string>
     <string name="app_name12">Tutorial 12</string>
+    <string name="app_name13">Tutorial 13</string>
     <!-- Splash Screen -->
     <string name="tutorial_04">Welcome!</string>
 
@@ -63,7 +64,10 @@
     <string name="branch">Branch</string>
 
 
-
     <!--        Animation             -->
     <string name="anim_duration_medium">1000</string>
+    <string name="sms">SMS</string>
+    <string name="enter_phone_number">Enter Phone Number</string>
+    <string name="enter_text_here">Enter Text here...</string>
+    <string name="call">Call</string>
 </resources>

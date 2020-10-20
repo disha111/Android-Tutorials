@@ -265,6 +265,9 @@ public class Welcome extends AppCompatActivity {
             case R.id.file_menu:
                 startActivity(new Intent(Welcome.this,FileManagement.class));
                 break;
+            case R.id.callAndSMS:
+                startActivity(new Intent(Welcome.this,SendCallAndSms.class));
+                break;
             case R.id.asyncTask:
                 Intent intent = new Intent(Welcome.this, Welcome.class);
                 intent.putExtra("temp",3);
