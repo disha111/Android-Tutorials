@@ -31,6 +31,7 @@ public class SendCallAndSms extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_send_call_and_sms);
+        setTitle("Call And Sms");
         phone = findViewById(R.id.callPhoneNumber);
         text = findViewById(R.id.smsText);
 //        num = numWithCode + " " + phone.getText().toString().trim();

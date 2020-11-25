@@ -9,13 +9,18 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.telephony.SmsManager;
+import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
@@ -40,6 +45,8 @@ public class Display extends AppCompatActivity {
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
 
+    //****************** Tutorial 13 **************
+    EditText userInput;
     //****************************** Offline data display controls assign here.... *****************************************
     TextView OfflineUserName,OfflineUserEmail,OfflineUserPhone,OfflineUserCity,OfflineUserBranch,OfflineUserGender,OfflineProfileName,OffineBranchLable,OfflineCityLable;
     @Override
@@ -50,7 +57,8 @@ public class Display extends AppCompatActivity {
         //*********************** Assign value... ****************************
         preferences = getSharedPreferences("Session",MODE_PRIVATE);
         editor = preferences.edit();
-
+        TextView textView = findViewById(R.id.OfflineDisplayCall);
+//        textView.setOnC
         if(preferences.getString("email","").equals("")){
             startActivity(new Intent(this, MainActivity.class));
             finish();
@@ -81,6 +89,62 @@ public class Display extends AppCompatActivity {
             }
         });
 
+        TextView msg = findViewById(R.id.OfflineDisplayMsg);
+        msg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // get prompts.xml view
+                LayoutInflater li = LayoutInflater.from(Display.this);
+                View promptsView = li.inflate(R.layout.prompts, null);
+
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                        Display.this,R.style.DialogTheme);
+
+                // set prompts.xml to alertdialog builder
+                alertDialogBuilder.setView(promptsView);
+
+                userInput = (EditText) promptsView
+                        .findViewById(R.id.smsInputFromUser);
+
+                // set dialog message
+                alertDialogBuilder
+                        .setCancelable(false)
+                        .setPositiveButton("OK",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        // get user input and set it to result
+                                        // edit text
+                                        if(!userInput.getText().toString().isEmpty()){
+                                            if(userInput.getText().toString().length()<160){
+                                                if(issmsPermission()){
+                                                    Toast.makeText(Display.this, "sending....", Toast.LENGTH_SHORT).show();
+                                                    sms();
+                                                }
+                                            }
+                                            else{
+                                                Toast.makeText(Display.this, "Message too long", Toast.LENGTH_SHORT).show();
+                                            }
+                                        }
+                                        else{
+                                            Toast.makeText(Display.this, "Enter Message to send", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                })
+                        .setNegativeButton("Cancel",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog,int id) {
+                                        dialog.cancel();
+                                    }
+                                });
+
+                // create alert dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // show it
+                alertDialog.show();
+
+            }
+        });
         //*******************"Tutorial 08"*******************
         Intent intent = getIntent();
         onlineDataView = findViewById(R.id.onlinedata_display);
@@ -253,20 +317,6 @@ public class Display extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 //************************ Tutorial13 ************************
-private boolean iscallPermission() {
-    if(Build.VERSION.SDK_INT >= 23){
-        if(checkSelfPermission(Manifest.permission.CALL_PHONE) ==PackageManager.PERMISSION_GRANTED){
-            return true;
-        }
-        else{
-            ActivityCompat.requestPermissions(Display.this,new String[]{Manifest.permission.CALL_PHONE},11);
-            return false;
-        }
-    }
-    else{
-        return true;
-    }
-}
 
     public void onRequestPermissionsResult(int requestCode,String permissions[],int[] grantResults){
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
@@ -280,12 +330,61 @@ private boolean iscallPermission() {
                     Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
                 }
                 break;
+            case 21:
+                if(grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    sms();
+                    Log.i("messagecheck","Permission granted in SMS Switch");
+                    Toast.makeText(this, "Permission granted", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    Toast.makeText(this, "Permission denied", Toast.LENGTH_SHORT).show();
+                }
+
+                break;
         }
     }
+    private boolean iscallPermission() {
+        if(Build.VERSION.SDK_INT >= 23){
+            if(checkSelfPermission(Manifest.permission.CALL_PHONE) ==PackageManager.PERMISSION_GRANTED){
+                return true;
+            }
+            else{
+                ActivityCompat.requestPermissions(Display.this,new String[]{Manifest.permission.CALL_PHONE},11);
+                return false;
+            }
+        }
+        else{
+            return true;
+        }
+    }
+
     private void makecall() {
         Intent intent = new Intent(Intent.ACTION_CALL);
         intent.setData(Uri.parse("tel:"+OfflineUserPhone.getText().toString()));
         startActivity(intent);
     }
+
+    //********************** Send SMS *******************************
+    private boolean issmsPermission() {
+        if(Build.VERSION.SDK_INT >= 23){
+            if(checkSelfPermission(Manifest.permission.SEND_SMS) == PackageManager.PERMISSION_GRANTED){
+                return true;
+            }
+            else{
+                ActivityCompat.requestPermissions(Display.this,new String[]{Manifest.permission.SEND_SMS},21);
+                return false;
+            }
+        }
+        else{
+            return true;
+        }
+    }
+    private void sms() {
+        String text_val = userInput.getText().toString();
+        SmsManager sms = SmsManager.getDefault();
+        sms.sendTextMessage(OfflineUserPhone.getText().toString(),null,text_val,null,null);
+        Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
+    }
+
 //************************ Tutorial13 ************************
 }

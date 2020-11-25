@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/layout_style2"
+    android:padding="10dp"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/textView1"
+        style="@style/textview_style"
+        android:text="Type Your Message : "
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/smsInputFromUser"
+        style="@style/edittext_style">
+
+        <requestFocus />
+
+    </EditText>
+</LinearLayout>
